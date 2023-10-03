@@ -32,6 +32,7 @@
 
 #textblock {
   background-color: black;
+  color: white;
   grid-column: 2/3;
   grid-row: 3/4;
 }

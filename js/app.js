@@ -1,5 +1,5 @@
 // Get container to be used to check that an image has been click
-//const imageContainer = document.getElementByID("image");
+//const productContainer = document.getElementByID("viewReults");
 
 const image1 = document.getElementById("image1");
 const image2 = document.getElementById("image2");
@@ -9,7 +9,7 @@ const image3 = document.getElementById("image3");
 let userClicks = 0;
 let maxClicks = 25;
 
-// Cnstructor for Product objects
+// Constructor for Product objects
 function Product(name, src) {
   this.name = name;
   this.src = src;
@@ -117,22 +117,24 @@ image2.addEventListener("click", handleImgClick);
 image3.addEventListener("click", handleImgClick);
 
 // a button to view the results
-//function showResults() {
-// put a bunch of lis into a ul
-//const showResults = document.getElementById("showResults");
+function showResults() {
+  // put a bunch of lis into a ul
+  const showResults = document.getElementById("viewResults");
 
-// loop through our products and make an li for each one
-//for (let i = 0; i < products.length; i++) {
-//const li = document.createElement("li");
-//const product = products[i];
-//li.textContent = `${product.name} was viewed ${product.views} times, and clicked ${product.clicks} times`;
-//results.appendChild(li);
-//}
-//}
+  // loop through our products and make an li for each one
+  for (let i = 0; i < allProducts.length; i++) {
+    const li = document.createElement("li");
+    const product = allProducts[i];
+    li.textContent = `${product.name} was viewed ${product.views} times, and clicked ${product.clicks} times`;
+    console.log(li.textContent);
+    viewResults.appendChild(li);
+  } //end loop
+} //end function
 
 // make the button show the results
-//const viewResults = document.getElementById("view-results");
-//viewResults.addEventListener("click", showResults);
+const viewResults = document.getElementById("showResults");
+console.log("pressed");
+viewResults.addEventListener("click", showResults);
 
 // render the results
 // when the user clicks the view results button
