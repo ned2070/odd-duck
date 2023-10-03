@@ -1,8 +1,13 @@
-// imageblock div
-let imageContainer = document.querySelector("section");
-let image1 = document.querySelector("section img:first-child");
-let image2 = document.querySelector("section img:nth-child(2)");
-let image3 = document.querySelector("section img(nth-child(3)");
+// Get container to be used to check that an image has been click
+//const imageContainer = document.getElementByID("image");
+
+const image1 = document.getElementById("image1");
+const image2 = document.getElementById("image2");
+const image3 = document.getElementById("image3");
+
+// make sure the user only has 25 clicks
+let userClicks = 0;
+let maxClicks = 25;
 
 // Cnstructor for Product objects
 function Product(name, src) {
@@ -11,6 +16,28 @@ function Product(name, src) {
   this.views = 0;
   this.clicks = 0;
 }
+
+// instantiate the products
+const allProducts = [
+  new Product("bag", "img/bag.jpg"),
+  new Product("bathroom", "img/bathroom.jpg"),
+  new Product("boots", "img/boots.jpg"),
+  new Product("breakfast", "img/breakfast.jpg"),
+  new Product("bubblegum", "img/bubblegum.jpg"),
+  new Product("chair", "img/chair.jpg"),
+  new Product("cthulhu", "img/cthulhu.jpg"),
+  new Product("dog-duck", "img/dog-duck.jpg"),
+  new Product("dragon", "img/dragon.jpg"),
+  new Product("pen", "img/pen.jpg"),
+  new Product("pet-sweep", "img/pet-sweep.jpg"),
+  new Product("scissors", "img/scissors.jpg"),
+  new Product("shark", "img/shark.jpg"),
+  new Product("sweep", "img/sweep.png"),
+  new Product("tauntaun", "img/tauntaun.jpg"),
+  new Product("unicorn", "img/unicorn.jpg"),
+  new Product("water-can", "img/water-can.jpg"),
+  new Product("wine-glass", "img/wine-glass.jpg"),
+];
 
 // function to choose a random product
 function getRandomIndex() {
@@ -34,75 +61,84 @@ function renderProducts() {
   }
 
   // change the src of the images
-  image1.src = allProducts[product11Index].src;
-  image2.src = allProducts[product22Index].src;
-  image2.src = allProducts[product32Index].src;
+  image1.src = allProducts[product1Index].src;
+  image2.src = allProducts[product2Index].src;
+  image3.src = allProducts[product3Index].src;
 
-  // chage the namesof the images
+  // chage the names of the images
   image1.alt = allProducts[product1Index].name;
   image2.alt = allProducts[product2Index].name;
   image3.alt = allProducts[product3Index].name;
 
   // increase the products views
-  allProducts[product11Index].views++;
-  allProducts[product21Index].views++;
-  allProducts[product31Index].views++;
+  allProducts[product1Index].views++;
+  allProducts[product2Index].views++;
+  allProducts[product3Index].views++;
 }
+// End of function
 
-// handle the product being clicked
-function handleProductClick(event) {
-  // get the name of the product just clicked
-  let clickedProduct = event.target.alt;
+// check if the click is on an image
+//if (event.target === imageContainer) {
+//alert("Please click on an image");
+//} else {
+// render more products
+//renderProducts();
+//}
 
-  // check if the click is on an image
-  if (event.target === productContainer) {
-    alert("Please click on an image");
-  } else {
-    // render more products
-    renderProducts();
+// handle what happens when click the image
+// render 3 new images
+function handleImgClick(event) {
+  // check if the user has run out of clicks
+  if (userClicks === maxClicks) {
+    alert("You have run out of votes");
+    return;
   }
 
+  // increase the number of times the user has clicked
+  userClicks++;
+
+  // get the name of the clicked product
+  let clickedProduct = event.target.alt;
+
   // increase the clicks of the product
-  // get this working then try another method
-  // loop through allProducts
-  for (let i = 0; i < allGoats.length; i++) {
-    // check if the name of the product in the array, matches the alt tag of our image
+  for (let i = 0; i < allProducts.length; i++) {
     if (clickedProduct === allProducts[i].name) {
-      // increase the number of clicks
       allProducts[i].clicks++;
-      // stop the for loop because we found the product
       break;
     }
   }
+
+  // render 3 more images
+  renderProducts();
 }
 
-// instantiate the products
-const allProducts = [
-  new Product("bag", "./img/bag.jpg"),
-  new Product("bathroom", "./img/bathroom.jpg"),
-  new Product("boots", "./img/boots.jpg"),
-  new Product("breakfast", "./img/breakfast.jpg"),
-  new Product("bubblegum", "./img/bubblegum.jpg"),
-  new Product("chair", "./img/chair.jpg"),
-  new Product("cthulhu", "./img/cthulhi.jpg"),
-  new Product("dog-duck", "./img/dog-duck.jpg"),
-  new Product("dragon", "./img/dragon.jpg"),
-  new Product("pen", "./img/pen.jpg"),
-  new Product("pet-sweep", "./img/pet-sweep.jpg"),
-  new Product("scissors", "./img/scissors.jpg"),
-  new Product("shark", "./img/shark.jpg"),
-  new Product("sweep", "./img/sweep.jpg"),
-  new Product("tauntaun", "./img/tauntaun.jpg"),
-  new Product("unicorn", "./img/unicorn.jpg"),
-  new Product("water-can", "./img/water-canjpg"),
-  new Product("wine-glass", "./img/wine-glass.jpg"),
-];
+image1.addEventListener("click", handleImgClick);
+image2.addEventListener("click", handleImgClick);
+image3.addEventListener("click", handleImgClick);
+
+// a button to view the results
+//function showResults() {
+// put a bunch of lis into a ul
+//const showResults = document.getElementById("showResults");
+
+// loop through our products and make an li for each one
+//for (let i = 0; i < products.length; i++) {
+//const li = document.createElement("li");
+//const product = products[i];
+//li.textContent = `${product.name} was viewed ${product.views} times, and clicked ${product.clicks} times`;
+//results.appendChild(li);
+//}
+//}
+
+// make the button show the results
+//const viewResults = document.getElementById("view-results");
+//viewResults.addEventListener("click", showResults);
 
 // render the results
 // when the user clicks the view results button
 // render a ul full of lis that tell the user how many tiems each product has been clicked
 
 // add the event listener to the products
-productContainer.addEventListener("click", handleProductClick);
+//productContainer.addEventListener("click", handleProductClick);
 
 renderProducts();
