@@ -11,53 +11,58 @@ function Product(name, src) {
   allProducts.push(this);
 }
 
-//function checkLocal() {
-// get the characters from local storage and parse it so it's not a string
-//const charsFromLS = JSON.parse(localStorage.getItem("allProducts"));
+function checkLocal() {
+  // get the characters from local storage and parse it so it's not a string
+  const charsFromLS = JSON.parse(localStorage.getItem("Products"));
 
-// if that exists:
-//if (charsFromLS) {
-// reinstantiate my array of objects one by one
-//for (let i = 0; i < charsFromLS.length; i++) {
-//const newProduct = new Product(
-//charsFromLS[i].name,
-//charsFromLS[i].src,
-//charsFromLS[i].views,
-//charsFromLS[i].clicks
-//);
-//allProducts.push(newProduct);
-//}
-//} else {
-// if it doesn't exist:
+  // if Products exists in local storage:
+  if (charsFromLS !== null) {
+    //console log for debugging
+    //console.log("storage");
+    // reinstantiate stored array of objects one by one
+    for (let i = 0; i < charsFromLS.length; i++) {
+      const newProduct = new Product(
+        charsFromLS[i].name,
+        charsFromLS[i].src,
+        charsFromLS[i].views,
+        charsFromLS[i].clicks
+      );
+      allProducts.push(newProduct);
+    }
+  } else {
+    // if it doesn't exist:
 
-// instantiate the products
+    // console log for debugging
+    //console.log("array");
+    // instantiate the products
 
-new Product("bag", "./img/bag.jpg"),
-  new Product("bathroom", "./img/bathroom.jpg"),
-  new Product("boots", "./img/boots.jpg"),
-  new Product("breakfast", "./img/breakfast.jpg"),
-  new Product("bubblegum", "./img/bubblegum.jpg"),
-  new Product("chair", "./img/chair.jpg"),
-  new Product("cthulhu", "./img/cthulhu.jpg"),
-  new Product("dog-duck", "./img/dog-duck.jpg"),
-  new Product("dragon", "./img/dragon.jpg"),
-  new Product("pen", "./img/pen.jpg"),
-  new Product("pet-sweep", "./img/pet-sweep.jpg"),
-  new Product("scissors", "./img/scissors.jpg"),
-  new Product("shark", "./img/shark.jpg"),
-  new Product("sweep", "./img/sweep.png"),
-  new Product("tauntaun", "./img/tauntaun.jpg"),
-  new Product("unicorn", "./img/unicorn.jpg"),
-  new Product("water-can", "./img/water-can.jpg"),
-  new Product("wine-glass", "./img/wine-glass.jpg");
-//}
-//}
+    new Product("bag", "./img/bag.jpg"),
+      new Product("bathroom", "./img/bathroom.jpg"),
+      new Product("boots", "./img/boots.jpg"),
+      new Product("breakfast", "./img/breakfast.jpg"),
+      new Product("bubblegum", "./img/bubblegum.jpg"),
+      new Product("chair", "./img/chair.jpg"),
+      new Product("cthulhu", "./img/cthulhu.jpg"),
+      new Product("dog-duck", "./img/dog-duck.jpg"),
+      new Product("dragon", "./img/dragon.jpg"),
+      new Product("pen", "./img/pen.jpg"),
+      new Product("pet-sweep", "./img/pet-sweep.jpg"),
+      new Product("scissors", "./img/scissors.jpg"),
+      new Product("shark", "./img/shark.jpg"),
+      new Product("sweep", "./img/sweep.png"),
+      new Product("tauntaun", "./img/tauntaun.jpg"),
+      new Product("unicorn", "./img/unicorn.jpg"),
+      new Product("water-can", "./img/water-can.jpg"),
+      new Product("wine-glass", "./img/wine-glass.jpg");
+  }
+}
 
 // put allProducts into local storage
-//function putIntoLocalStorage() {
-//const productsStringified = JSON.stringify(allProducts);
-//localStorage.setItem("Products", productsStringified);
-//}
+function putIntoLocalStorage() {
+  // convert to string
+  const productsStringified = JSON.stringify(allProducts);
+  localStorage.setItem("Products", productsStringified);
+}
 
 const image1 = document.getElementById("image1");
 const image2 = document.getElementById("image2");
@@ -138,9 +143,8 @@ image1.addEventListener("click", handleImgClick);
 image2.addEventListener("click", handleImgClick);
 image3.addEventListener("click", handleImgClick);
 
-// a button to view the results
 function showResults() {
-  // put a bunch of lis into a ul
+  // put items into a ul
   const showResults = document.getElementById("viewResults");
 
   // loop through our products and make an li for each one
@@ -154,14 +158,16 @@ function showResults() {
   } //end loop
 } //end function
 
-//checkLocal();
+// check local storage
+checkLocal();
+// show first products
 renderProducts();
 
 // Make chart
 
 function chartRender() {
   //context
-  const ctx = document.getElementByID("productChart");
+  const ctx = document.getElementById("productChart");
   //product names for chart
   const labels = [];
   //product views for chart
