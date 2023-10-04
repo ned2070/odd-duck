@@ -1,3 +1,62 @@
+const allProducts = [];
+
+// Constructor for Product objects
+function Product(name, src) {
+  this.name = name;
+  this.src = src;
+  this.views = 0;
+  this.clicks = 0;
+  //fill allProducts array
+  allProducts.push(this);
+}
+
+function checkLocal() {
+  // get the characters from local storage and parse it so it's not a string
+  const charsFromLS = JSON.parse(localStorage.getItem("allProducts"));
+
+  // if that exists:
+  if (charsFromLS) {
+    // reinstantiate my array of objects one by one
+    for (let i = 0; i < charsFromLS.length; i++) {
+      const newProduct = new Product(
+        charsFromLS[i].name,
+        charsFromLS[i].src,
+        charsFromLS[i].views,
+        charsFromLS[i].clicks
+      );
+      allProducts.push(newProduct);
+    }
+  } else {
+    // if it doesn't exist:
+
+    // instantiate the products
+
+    new Product("bag", "img/bag.jpg"),
+      new Product("bathroom", "img/bathroom.jpg"),
+      new Product("boots", "img/boots.jpg"),
+      new Product("breakfast", "img/breakfast.jpg"),
+      new Product("bubblegum", "img/bubblegum.jpg"),
+      new Product("chair", "img/chair.jpg"),
+      new Product("cthulhu", "img/cthulhu.jpg"),
+      new Product("dog-duck", "img/dog-duck.jpg"),
+      new Product("dragon", "img/dragon.jpg"),
+      new Product("pen", "img/pen.jpg"),
+      new Product("pet-sweep", "img/pet-sweep.jpg"),
+      new Product("scissors", "img/scissors.jpg"),
+      new Product("shark", "img/shark.jpg"),
+      new Product("sweep", "img/sweep.png"),
+      new Product("tauntaun", "img/tauntaun.jpg"),
+      new Product("unicorn", "img/unicorn.jpg"),
+      new Product("water-can", "img/water-can.jpg"),
+      new Product("wine-glass", "img/wine-glass.jpg");
+  }
+}
+
+// put allProducts into local storage
+function putIntoLocalStorage() {
+  const productsStringified = JSON.stringify(allProducts);
+  localStorage.setItem("Products", productsStringified);
+}
 // Get container to be used to check that an image has been click
 //const productContainer = document.getElementByID("viewReults");
 
@@ -8,36 +67,6 @@ const image3 = document.getElementById("image3");
 // make sure the user only has 25 clicks
 let userClicks = 0;
 let maxClicks = 25;
-
-// Constructor for Product objects
-function Product(name, src) {
-  this.name = name;
-  this.src = src;
-  this.views = 0;
-  this.clicks = 0;
-}
-
-// instantiate the products
-const allProducts = [
-  new Product("bag", "img/bag.jpg"),
-  new Product("bathroom", "img/bathroom.jpg"),
-  new Product("boots", "img/boots.jpg"),
-  new Product("breakfast", "img/breakfast.jpg"),
-  new Product("bubblegum", "img/bubblegum.jpg"),
-  new Product("chair", "img/chair.jpg"),
-  new Product("cthulhu", "img/cthulhu.jpg"),
-  new Product("dog-duck", "img/dog-duck.jpg"),
-  new Product("dragon", "img/dragon.jpg"),
-  new Product("pen", "img/pen.jpg"),
-  new Product("pet-sweep", "img/pet-sweep.jpg"),
-  new Product("scissors", "img/scissors.jpg"),
-  new Product("shark", "img/shark.jpg"),
-  new Product("sweep", "img/sweep.png"),
-  new Product("tauntaun", "img/tauntaun.jpg"),
-  new Product("unicorn", "img/unicorn.jpg"),
-  new Product("water-can", "img/water-can.jpg"),
-  new Product("wine-glass", "img/wine-glass.jpg"),
-];
 
 // function to choose a random product
 function getRandomIndex() {
@@ -91,6 +120,9 @@ function handleImgClick(event) {
   // check if the user has run out of clicks
   if (userClicks === maxClicks) {
     alert("You have run out of votes");
+    // put our characters array into local storage
+    putIntoLocalStorage();
+
     return;
   }
 
@@ -145,6 +177,7 @@ viewResults.addEventListener("click", showResults);
 // add the event listener to the products
 //productContainer.addEventListener("click", handleProductClick);
 
+checkLocal();
 renderProducts();
 
 // Make chart
