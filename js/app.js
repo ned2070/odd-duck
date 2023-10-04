@@ -1,3 +1,4 @@
+// initialise array
 const allProducts = [];
 
 // Constructor for Product objects
@@ -10,55 +11,53 @@ function Product(name, src) {
   allProducts.push(this);
 }
 
-function checkLocal() {
-  // get the characters from local storage and parse it so it's not a string
-  const charsFromLS = JSON.parse(localStorage.getItem("allProducts"));
+//function checkLocal() {
+// get the characters from local storage and parse it so it's not a string
+//const charsFromLS = JSON.parse(localStorage.getItem("allProducts"));
 
-  // if that exists:
-  if (charsFromLS) {
-    // reinstantiate my array of objects one by one
-    for (let i = 0; i < charsFromLS.length; i++) {
-      const newProduct = new Product(
-        charsFromLS[i].name,
-        charsFromLS[i].src,
-        charsFromLS[i].views,
-        charsFromLS[i].clicks
-      );
-      allProducts.push(newProduct);
-    }
-  } else {
-    // if it doesn't exist:
+// if that exists:
+//if (charsFromLS) {
+// reinstantiate my array of objects one by one
+//for (let i = 0; i < charsFromLS.length; i++) {
+//const newProduct = new Product(
+//charsFromLS[i].name,
+//charsFromLS[i].src,
+//charsFromLS[i].views,
+//charsFromLS[i].clicks
+//);
+//allProducts.push(newProduct);
+//}
+//} else {
+// if it doesn't exist:
 
-    // instantiate the products
+// instantiate the products
 
-    new Product("bag", "img/bag.jpg"),
-      new Product("bathroom", "img/bathroom.jpg"),
-      new Product("boots", "img/boots.jpg"),
-      new Product("breakfast", "img/breakfast.jpg"),
-      new Product("bubblegum", "img/bubblegum.jpg"),
-      new Product("chair", "img/chair.jpg"),
-      new Product("cthulhu", "img/cthulhu.jpg"),
-      new Product("dog-duck", "img/dog-duck.jpg"),
-      new Product("dragon", "img/dragon.jpg"),
-      new Product("pen", "img/pen.jpg"),
-      new Product("pet-sweep", "img/pet-sweep.jpg"),
-      new Product("scissors", "img/scissors.jpg"),
-      new Product("shark", "img/shark.jpg"),
-      new Product("sweep", "img/sweep.png"),
-      new Product("tauntaun", "img/tauntaun.jpg"),
-      new Product("unicorn", "img/unicorn.jpg"),
-      new Product("water-can", "img/water-can.jpg"),
-      new Product("wine-glass", "img/wine-glass.jpg");
-  }
-}
+new Product("bag", "./img/bag.jpg"),
+  new Product("bathroom", "./img/bathroom.jpg"),
+  new Product("boots", "./img/boots.jpg"),
+  new Product("breakfast", "./img/breakfast.jpg"),
+  new Product("bubblegum", "./img/bubblegum.jpg"),
+  new Product("chair", "./img/chair.jpg"),
+  new Product("cthulhu", "./img/cthulhu.jpg"),
+  new Product("dog-duck", "./img/dog-duck.jpg"),
+  new Product("dragon", "./img/dragon.jpg"),
+  new Product("pen", "./img/pen.jpg"),
+  new Product("pet-sweep", "./img/pet-sweep.jpg"),
+  new Product("scissors", "./img/scissors.jpg"),
+  new Product("shark", "./img/shark.jpg"),
+  new Product("sweep", "./img/sweep.png"),
+  new Product("tauntaun", "./img/tauntaun.jpg"),
+  new Product("unicorn", "./img/unicorn.jpg"),
+  new Product("water-can", "./img/water-can.jpg"),
+  new Product("wine-glass", "./img/wine-glass.jpg");
+//}
+//}
 
 // put allProducts into local storage
-function putIntoLocalStorage() {
-  const productsStringified = JSON.stringify(allProducts);
-  localStorage.setItem("Products", productsStringified);
-}
-// Get container to be used to check that an image has been click
-//const productContainer = document.getElementByID("viewReults");
+//function putIntoLocalStorage() {
+//const productsStringified = JSON.stringify(allProducts);
+//localStorage.setItem("Products", productsStringified);
+//}
 
 const image1 = document.getElementById("image1");
 const image2 = document.getElementById("image2");
@@ -66,7 +65,8 @@ const image3 = document.getElementById("image3");
 
 // make sure the user only has 25 clicks
 let userClicks = 0;
-let maxClicks = 25;
+//let maxClicks = 25;
+let maxClicks = 5; // for debugging purposes
 
 // function to choose a random product
 function getRandomIndex() {
@@ -104,15 +104,6 @@ function renderProducts() {
   allProducts[product2Index].views++;
   allProducts[product3Index].views++;
 }
-// End of function
-
-// check if the click is on an image
-//if (event.target === imageContainer) {
-//alert("Please click on an image");
-//} else {
-// render more products
-//renderProducts();
-//}
 
 // handle what happens when click the image
 // render 3 new images
@@ -120,9 +111,8 @@ function handleImgClick(event) {
   // check if the user has run out of clicks
   if (userClicks === maxClicks) {
     alert("You have run out of votes");
-    // put our characters array into local storage
-    putIntoLocalStorage();
-
+    showResults();
+    chartRender();
     return;
   }
 
@@ -164,20 +154,7 @@ function showResults() {
   } //end loop
 } //end function
 
-// make the button show the results
-const viewResults = document.getElementById("showResults");
-// console log for debugging
-// console.log("pressed");
-viewResults.addEventListener("click", showResults);
-
-// render the results
-// when the user clicks the view results button
-// render a ul full of lis that tell the user how many tiems each product has been clicked
-
-// add the event listener to the products
-//productContainer.addEventListener("click", handleProductClick);
-
-checkLocal();
+//checkLocal();
 renderProducts();
 
 // Make chart
@@ -211,7 +188,7 @@ function chartRender() {
           borderWidth: 1,
         },
         {
-          type: "line",
+          type: "bar",
           label: "# of clicks",
           data: clicks,
           borderWidth: 1,
