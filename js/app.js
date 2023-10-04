@@ -126,14 +126,16 @@ function showResults() {
     const li = document.createElement("li");
     const product = allProducts[i];
     li.textContent = `${product.name} was viewed ${product.views} times, and clicked ${product.clicks} times`;
-    console.log(li.textContent);
+    // console log for debugging
+    //console.log(li.textContent);
     viewResults.appendChild(li);
   } //end loop
 } //end function
 
 // make the button show the results
 const viewResults = document.getElementById("showResults");
-console.log("pressed");
+// console log for debugging
+// console.log("pressed");
 viewResults.addEventListener("click", showResults);
 
 // render the results
@@ -144,3 +146,44 @@ viewResults.addEventListener("click", showResults);
 //productContainer.addEventListener("click", handleProductClick);
 
 renderProducts();
+
+// Make chart
+
+function chartRender() {
+  //context
+  const ctx = document.getElementByID("productChart");
+  //product names for chart
+  const labels = [];
+  //product views for chart
+  const views = [];
+  //product clicks for chart
+  const clicks = [];
+
+  // Fill arrays for chart from arrays for products
+  for (let i = 0; i < allProducts.length; i++) {
+    labels.push(allProducts[i].name);
+    views.push(allProducts[i].views);
+    clicks.push(allProducts[i].clicks);
+  }
+
+  // render chart
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "# of views",
+          data: views,
+          borderWidth: 1,
+        },
+        {
+          type: "line",
+          label: "# of clicks",
+          data: clicks,
+          borderWidth: 1,
+        },
+      ],
+    },
+  });
+} // end function
