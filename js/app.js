@@ -18,7 +18,7 @@ function checkLocal() {
   // if Products exists in local storage:
   if (charsFromLS !== null) {
     //console log for debugging
-    //console.log("storage");
+    console.log("storage");
     // reinstantiate stored array of objects one by one
     for (let i = 0; i < charsFromLS.length; i++) {
       const newProduct = new Product(
@@ -117,7 +117,9 @@ function handleImgClick(event) {
   if (userClicks === maxClicks) {
     alert("You have run out of votes");
     showResults();
-    chartRender();
+    putIntoLocalStorage();
+    //chartRender();
+
     return;
   }
 
@@ -154,7 +156,7 @@ function showResults() {
     li.textContent = `${product.name} was viewed ${product.views} times, and clicked ${product.clicks} times`;
     // console log for debugging
     //console.log(li.textContent);
-    viewResults.appendChild(li);
+    //viewResults.appendChild(li);
   } //end loop
 } //end function
 
@@ -162,44 +164,3 @@ function showResults() {
 checkLocal();
 // show first products
 renderProducts();
-
-// Make chart
-
-function chartRender() {
-  //context
-  const ctx = document.getElementById("productChart");
-  //product names for chart
-  const labels = [];
-  //product views for chart
-  const views = [];
-  //product clicks for chart
-  const clicks = [];
-
-  // Fill arrays for chart from arrays for products
-  for (let i = 0; i < allProducts.length; i++) {
-    labels.push(allProducts[i].name);
-    views.push(allProducts[i].views);
-    clicks.push(allProducts[i].clicks);
-  }
-
-  // render chart
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: labels,
-      datasets: [
-        {
-          label: "# of views",
-          data: views,
-          borderWidth: 1,
-        },
-        {
-          type: "bar",
-          label: "# of clicks",
-          data: clicks,
-          borderWidth: 1,
-        },
-      ],
-    },
-  });
-} // end function
