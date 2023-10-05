@@ -34,28 +34,28 @@ function checkLocal() {
     // if it doesn't exist:
 
     // console log for debugging
-    console.log("array");
+    //console.log("array");
 
     // instantiate the products
 
-    new Product("bag", "/img/bag.jpg", 0, 0),
-      new Product("bathroom", "/img/bathroom.jpg", 0, 0),
-      new Product("boots", "/img/boots.jpg", 0, 0),
-      new Product("breakfast", "/img/breakfast.jpg", 0, 0),
-      new Product("bubblegum", "/img/bubblegum.jpg", 0, 0),
-      new Product("chair", "/img/chair.jpg", 0, 0),
-      new Product("cthulhu", "/img/cthulhu.jpg", 0, 0),
-      new Product("dog-duck", "/img/dog-duck.jpg", 0, 0),
-      new Product("dragon", "/img/dragon.jpg", 0, 0),
-      new Product("pen", "/img/pen.jpg", 0, 0),
-      new Product("pet-sweep", "/img/pet-sweep.jpg", 0, 0),
-      new Product("scissors", "/img/scissors.jpg", 0, 0),
-      new Product("shark", "/img/shark.jpg", 0, 0),
-      new Product("sweep", "/img/sweep.png", 0, 0),
-      new Product("tauntaun", "/img/tauntaun.jpg", 0, 0),
-      new Product("unicorn", "/img/unicorn.jpg", 0, 0),
-      new Product("water-can", "/img/water-can.jpg", 0, 0),
-      new Product("wine-glass", "/img/wine-glass.jpg", 0, 0);
+    new Product("bag", "./img/bag.jpg", 0, 0),
+      new Product("bathroom", "./img/bathroom.jpg", 0, 0),
+      new Product("boots", "./img/boots.jpg", 0, 0),
+      new Product("breakfast", "./img/breakfast.jpg", 0, 0),
+      new Product("bubblegum", "./img/bubblegum.jpg", 0, 0),
+      new Product("chair", "./img/chair.jpg", 0, 0),
+      new Product("cthulhu", "./img/cthulhu.jpg", 0, 0),
+      new Product("dog-duck", "./img/dog-duck.jpg", 0, 0),
+      new Product("dragon", "./img/dragon.jpg", 0, 0),
+      new Product("pen", "./img/pen.jpg", 0, 0),
+      new Product("pet-sweep", "./img/pet-sweep.jpg", 0, 0),
+      new Product("scissors", "./img/scissors.jpg", 0, 0),
+      new Product("shark", "./img/shark.jpg", 0, 0),
+      new Product("sweep", "./img/sweep.png", 0, 0),
+      new Product("tauntaun", "./img/tauntaun.jpg", 0, 0),
+      new Product("unicorn", "./img/unicorn.jpg", 0, 0),
+      new Product("water-can", "./img/water-can.jpg", 0, 0),
+      new Product("wine-glass", "./img/wine-glass.jpg", 0, 0);
   }
 }
 
@@ -92,7 +92,7 @@ function renderProducts() {
   while (
     product1Index === product2Index ||
     product2Index === product3Index ||
-    product1Index === Product3Index
+    product1Index === product3Index
   ) {
     product2Index = getRandomIndex();
     product3Index = getRandomIndex();

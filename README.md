@@ -15,4 +15,6 @@ Local storage working, graph is showing every session as separate bars - correct
 
 Graph moved to new page, rendering but not reading from storage - corrected
 
-Graph still showing as separate bars
+To do: Graph still showing as separate bars
+While loop to prevent repitition isn't working
+CSS
